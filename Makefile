@@ -1,16 +1,16 @@
 srcdir=		.
 
-prefix=		/usr
+prefix=		/usr/local
 exec_prefix=	${prefix}
 datarootdir=	${prefix}/share
 localedir=	${datarootdir}/locale
 
-CC=		/usr/local/gcc-6.1.0/bin/gcc-6.1.0
+CC=		clang
 RANLIB=		ranlib
-CFLAGS=		-O2 -pipe -Wall -Wshadow -Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes -Wcast-align -Wcast-qual -Wpointer-arith -Wwrite-strings -Wmissing-declarations -Wnested-externs -Wundef -pedantic -fno-common
+CFLAGS=		-Oz -pipe -Wall -Wshadow -Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes -Wcast-align -Wcast-qual -Wpointer-arith -Wwrite-strings -Wmissing-declarations -Wnested-externs -Wundef -pedantic -fno-common
 CPPFLAGS=	 -DLOCALEDIR=\"$(localedir)\"
-LDFLAGS=	
-LIBS=		-lcurses -lm 
+LDFLAGS=	-s -flto -g
+LIBS=		-lcurses 
 
 CATALOGS=	de.mo
 
@@ -39,21 +39,21 @@ install-po-no:
 install-po-yes:	$(CATALOGS)
 		for cat in $(CATALOGS); do \
 		  dir=$(localedir)/`basename $$cat .mo`/LC_MESSAGES; \
-		  [ -d $$dir ] || /usr/bin/install -c -m 755 -d $$dir; \
-		  /usr/bin/install -c -m 644 $$cat $$dir/bas.mo; \
+		  [ -d $$dir ] || /opt/homebrew/bin/ginstall -c -m 755 -d $$dir; \
+		  /opt/homebrew/bin/ginstall -c -m 644 $$cat $$dir/bas.mo; \
 		done
 
 check:		bas
 		for i in test/test*; do ./$$i || break; done
 
 install:	all
-		/usr/bin/install -c -m 755 -d ${exec_prefix}/bin
-		/usr/bin/install -c bas ${exec_prefix}/bin/bas
-		/usr/bin/install -c -m 755 -d ${exec_prefix}/lib
-		/usr/bin/install -c -m 644 libbas.a ${exec_prefix}/lib/libbas.a
+		/opt/homebrew/bin/ginstall -c -m 755 -d ${exec_prefix}/bin
+		/opt/homebrew/bin/ginstall -c bas ${exec_prefix}/bin/bas
+		/opt/homebrew/bin/ginstall -c -m 755 -d ${exec_prefix}/lib
+		/opt/homebrew/bin/ginstall -c -m 644 libbas.a ${exec_prefix}/lib/libbas.a
 		ranlib ${exec_prefix}/lib/libbas.a
-		/usr/bin/install -c -m 755 -d ${datarootdir}/man/man1
-		/usr/bin/install -c -m 644 bas.1 ${datarootdir}/man/man1/bas.1
+		/opt/homebrew/bin/ginstall -c -m 755 -d ${datarootdir}/man/man1
+		/opt/homebrew/bin/ginstall -c -m 644 bas.1 ${datarootdir}/man/man1/bas.1
 		make install-po
 
 .c.o:

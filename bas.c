@@ -1645,7 +1645,15 @@ void bas_interpreter(void) /*{{{*/
 {
   if (FS_istty(STDCHANNEL))
   {
-    FS_putChars(STDCHANNEL,"bas " VERSION "\n");
+    //FS_putChars(STDCHANNEL,"bas " VERSION "\n");
+    FS_putChars(STDCHANNEL,
+" ######              ##               #####             ####             ######\n"
+" ##   ##             ##              ##   ##           ##  ##            ##    \n"
+" ##   ##            ####             ##                    ##            ##### \n"
+" ######             ## #              #####               ##                 ##\n"
+" ##   ##           ######                 ##             ##                  ##\n"
+" ##   ##           ##   #            ##   ##            ##        ##     ##  ##\n"
+" ######           ###   ##            #####            ######     ##      #### \n");
     FS_putChars(STDCHANNEL,"Copyright 1999-2014 Michael Haardt.\n");
     FS_putChars(STDCHANNEL,_("This is free software with ABSOLUTELY NO WARRANTY.\n"));
   }

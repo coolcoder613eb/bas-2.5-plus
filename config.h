@@ -1,6 +1,6 @@
 /* config.h.  Generated from config.h.in by configure.  */
 /* The version string */
-#define VERSION "2.5"
+#define VERSION "2.4"
 
 /* The package name. */
 #define PACKAGE @PACKAGE@
@@ -33,7 +33,7 @@
 /* #undef USE_LR0 */
 
 /* Define either for large file support, if your OS needs them. */
-#define _FILE_OFFSET_BITS 64
+/* #undef _FILE_OFFSET_BITS */
 /* #undef _LARGE_FILES */
 
 /* Define if you have the msgfmt(1) program and the gettext(3) function. */
